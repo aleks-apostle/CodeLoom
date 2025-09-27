@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "contention_metrics.schema.json",
+  "title": "Contention Metrics Payload",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "interval_sec": {"type": "number"},
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "files": {"type": "integer", "minimum": 0},
+        "holders": {"type": "integer", "minimum": 0},
+        "queued": {"type": "integer", "minimum": 0}
+      },
+      "required": ["files", "holders", "queued"]
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "file": {"type": "string"},
+          "holders": {"type": "integer", "minimum": 0},
+          "queued": {"type": "integer", "minimum": 0}
+        },
+        "required": ["file", "holders", "queued"]
+      }
+    }
+  },
+  "required": ["interval_sec", "totals", "files"]
+}
+

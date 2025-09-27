@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "plan.schema.json",
+  "title": "Plan Payload",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "dag": {
+      "type": ["object", "null"],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {"id": {"type": "string"}, "label": {"type": "string"}},
+            "required": ["id", "label"]
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {"source": {"type": "string"}, "target": {"type": "string"}},
+            "required": ["source", "target"]
+          }
+        }
+      },
+      "required": ["nodes", "edges"]
+    },
+    "owners": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {"role": {"type": "string"}, "files": {"type": "array", "items": {"type": "string"}}},
+        "required": ["role", "files"]
+      },
+      "default": []
+    }
+  },
+  "required": ["owners"]
+}
+

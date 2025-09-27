@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file_update.schema.json",
+  "title": "File Update Payload",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "file": {"type": "string"},
+    "diff_id": {"type": "string", "pattern": "^[0-9a-fA-F-]{36}$"},
+    "description": {"type": "string"},
+    "diff": {"type": "string"},
+    "base_rev": {"type": ["integer", "null"], "minimum": 0},
+    "new_rev": {"type": "integer", "minimum": 1},
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "merge": {"type": "string", "enum": ["diff3"]}
+      }
+    }
+  },
+  "required": ["file", "diff_id", "description", "diff", "new_rev"]
+}

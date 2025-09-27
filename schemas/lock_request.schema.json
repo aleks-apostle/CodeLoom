@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lock_request.schema.json",
+  "title": "Lock Request Payload",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "file": {"type": "string"},
+    "range": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "start_line": {"type": "integer", "minimum": 1},
+        "end_line": {"type": "integer", "minimum": 1}
+      },
+      "required": ["start_line", "end_line"]
+    }
+  },
+  "required": ["file"]
+}
+

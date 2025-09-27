@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "envelope.schema.json",
+  "title": "MACP Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": {"const": "0.1"},
+    "message_id": {"type": "string", "pattern": "^[0-9a-fA-F-]{36}$"},
+    "task_id": {"type": "string", "pattern": "^[0-9a-fA-F-]{36}$"},
+    "type": {
+      "type": "string",
+      "enum": [
+        "Plan",
+        "LockRequest",
+        "LockGrant",
+        "LockRelease",
+        "FileUpdate",
+        "TestResult",
+        "ReviewComment",
+        "ConflictDetected",
+        "ContentionMetrics",
+        "BackpressureWarning"
+      ]
+    },
+    "timestamp": {"type": "string", "format": "date-time"},
+    "sender": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {"type": "string", "pattern": "^[0-9a-fA-F-]{36}$"},
+        "role": {"type": "string"},
+        "capabilities": {
+          "type": "array",
+          "items": {"type": "string"},
+          "default": []
+        }
+      },
+      "required": ["agent_id", "role", "capabilities"]
+    },
+    "recipients": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[0-9a-fA-F-]{36}$"}
+    },
+    "payload": {"type": "object"},
+    "correlation_id": {"type": "string", "pattern": "^[0-9a-fA-F-]{36}$"}
+  },
+  "required": ["version", "message_id", "type", "timestamp", "sender", "payload"],
+  "allOf": [
+    {
+      "if": {"properties": {"type": {"const": "Plan"}}},
+      "then": {"properties": {"payload": {"$ref": "plan.schema.json"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "LockRequest"}}},
+      "then": {"properties": {"payload": {"$ref": "lock_request.schema.json"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "LockGrant"}}},
+      "then": {"properties": {"payload": {"$ref": "lock_grant.schema.json"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "LockRelease"}}},
+      "then": {"properties": {"payload": {"$ref": "lock_release.schema.json"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "FileUpdate"}}},
+      "then": {"properties": {"payload": {"$ref": "file_update.schema.json"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "TestResult"}}},
+      "then": {"properties": {"payload": {"$ref": "test_result.schema.json"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "ReviewComment"}}},
+      "then": {"properties": {"payload": {"$ref": "review_comment.schema.json"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "ConflictDetected"}}},
+      "then": {"properties": {"payload": {"$ref": "conflict_detected.schema.json"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "ContentionMetrics"}}},
+      "then": {"properties": {"payload": {"$ref": "contention_metrics.schema.json"}}}
+    },
+    {
+      "if": {"properties": {"type": {"const": "BackpressureWarning"}}},
+      "then": {"properties": {"payload": {"$ref": "backpressure_warning.schema.json"}}}
+    }
+  ]
+}

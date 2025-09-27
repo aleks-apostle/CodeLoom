@@ -1,0 +1,16 @@
+{
+  "version": "0.1",
+  "message_id": "11111111-1111-1111-1111-111111111114",
+  "task_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "type": "LockRelease",
+  "timestamp": "2025-01-01T00:00:00Z",
+  "sender": {
+    "agent_id": "22222222-2222-2222-2222-222222222222",
+    "role": "coder",
+    "capabilities": ["diff", "lock"]
+  },
+  "payload": {
+    "ticket": "33333333-3333-3333-3333-333333333333"
+  }
+}
+

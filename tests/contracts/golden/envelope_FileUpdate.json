@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "message_id": "11111111-1111-1111-1111-111111111115",
+  "task_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "type": "FileUpdate",
+  "timestamp": "2025-01-01T00:00:00Z",
+  "sender": {
+    "agent_id": "22222222-2222-2222-2222-222222222222",
+    "role": "coder",
+    "capabilities": ["diff", "lock"]
+  },
+  "payload": {
+    "file": "hub/app.py",
+    "diff_id": "44444444-4444-4444-4444-444444444444",
+    "description": "Initial stub",
+    "diff": "*** Begin Patch\n*** Add File: hub/app.py\n+print('hi')\n*** End Patch\n",
+    "base_rev": 0,
+    "new_rev": 1
+  }
+}
+

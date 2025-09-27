@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "review_comment.schema.json",
+  "title": "Review Comment Payload",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "file": {"type": "string"},
+    "line": {"type": "integer", "minimum": 1},
+    "comment": {"type": "string"},
+    "ref_diff_id": {"type": ["string", "null"], "pattern": "^[0-9a-fA-F-]{36}$"}
+  },
+  "required": ["file", "line", "comment"]
+}
+

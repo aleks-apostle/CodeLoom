@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "conflict_detected.schema.json",
+  "title": "Conflict Detected Payload",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "file": {"type": "string"},
+    "base_rev": {"type": ["integer", "null"], "minimum": 0},
+    "hunks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "range": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "start_line": {"type": "integer", "minimum": 1},
+              "end_line": {"type": "integer", "minimum": 1}
+            },
+            "required": ["start_line", "end_line"]
+          },
+          "ours": {"type": "string"},
+          "theirs": {"type": "string"},
+          "reason": {"type": "string"}
+        },
+        "required": ["range", "ours", "theirs", "reason"]
+      }
+    }
+  },
+  "required": ["file", "hunks"]
+}
+

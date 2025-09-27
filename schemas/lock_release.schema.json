@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lock_release.schema.json",
+  "title": "Lock Release Payload",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ticket": {"type": "string", "pattern": "^[0-9a-fA-F-]{36}$"},
+    "range": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "start_line": {"type": "integer", "minimum": 1},
+        "end_line": {"type": "integer", "minimum": 1}
+      },
+      "required": ["start_line", "end_line"]
+    }
+  },
+  "required": ["ticket"]
+}

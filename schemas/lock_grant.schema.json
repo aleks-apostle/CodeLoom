@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lock_grant.schema.json",
+  "title": "Lock Grant Payload",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "file": {"type": "string"},
+    "ticket": {"type": "string", "pattern": "^[0-9a-fA-F-]{36}$"},
+    "range": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "start_line": {"type": "integer", "minimum": 1},
+        "end_line": {"type": "integer", "minimum": 1}
+      },
+      "required": ["start_line", "end_line"]
+    }
+  },
+  "required": ["file", "ticket"]
+}
